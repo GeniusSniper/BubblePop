@@ -6,7 +6,7 @@
 //     }
 // }
 
-const Bubble = (name, offset = 1) => {
+const Bubble = (name, offset = 1, speed = 250, bottomOfPage = window.innerHeight + 'px') => {
     const element = document.createElement("div");
     element.innerHTML = "";
     element.style.border = "1px solid black";
@@ -20,10 +20,11 @@ const Bubble = (name, offset = 1) => {
     });
     element.className = 'test';
     element.style.position = 'relative';
-    element.style.top = '100px';
+    element.style.top = bottomOfPage;
     setInterval(() => {
         element.style.top = element.offsetTop - 8 - offset + "px";// default = 8
-    }, 1000);
+        if(parseInt(element.style.top.split('px')[0]) <= -8) element.remove();
+    }, speed);
     return element;
 };
 
